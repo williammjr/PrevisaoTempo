@@ -1,0 +1,25 @@
+﻿@{
+    List<ClimaTempo.Models.PrevisaoClima> previsaoSemana = (List<ClimaTempo.Models.PrevisaoClima>)ViewBag.PrevisaoSemana;
+}
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in previsaoSemana)
+        {
+            var culture = new System.Globalization.CultureInfo("pt-BR");
+            var day = culture.DateTimeFormat.GetDayName(item.DataPrevisao.DayOfWeek);
+
+            <div class="col-lg-1" style="width: 160px; padding: 1px">
+                <div class="panel panel-default">
+                    <div class="panel-heading">@item.DataPrevisao.ToString("dd/MM/yyyy") <br /> @day</div>
+                    <div class="panel-body">
+                        @item.Clima <br />
+                        Mínima: @item.TemperaturaMinima °C I
+                        Máxima: @item.TemperaturaMaxima °C K
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+

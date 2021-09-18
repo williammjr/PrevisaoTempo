@@ -1,0 +1,27 @@
+﻿
+@{
+    List<ClimaTempo.Models.CidadesMaisQuentesFrias> cidadesMaisQuentes = (List<ClimaTempo.Models.CidadesMaisQuentesFrias>)ViewBag.CidadesMaisQuentes;
+    List<ClimaTempo.Models.CidadesMaisQuentesFrias> cidadesMaisFrias = (List<ClimaTempo.Models.CidadesMaisQuentesFrias>)ViewBag.CidadesMaisFrias;
+}
+
+<div class="col-12 row">
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading"><label>Cidades mais quentes hoje</label></div>
+            @foreach (var item in cidadesMaisQuentes)
+            {
+                <div class="panel-body"><label class="pull-left"><label>@item.Cidade</label> <br /> <label>@item.Estado</label></label><label class="pull-right">Máx @item.TemperaturaMaxima °C</label></div>
+            }
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading"><label>Cidades mais frias hoje</label></div>
+            @foreach (var item in cidadesMaisFrias)
+            {
+                <div class="panel-body"><label class="pull-left">@item.Cidade / @item.Estado</label><label class="pull-right">Máx @item.TemperaturaMaxima °C</label></div>
+            }
+        </div>
+    </div>
+</div>
