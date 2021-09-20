@@ -6,6 +6,7 @@
 
 @Scripts.Render("~/bundles/select2js")
 @Styles.Render("~/bundles/select2css")
+@Styles.Render("~/bundles/climaTempoCSS")
 
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
@@ -15,15 +16,13 @@
         $('.js-example-basic-single').select2();
 
         $('.js-example-basic-single').on('select2:select', function (e) {
-            console.log($('.js-example-basic-single').val())
-
              $.ajax({
                 url: '@Url.Action("CardsPrevisaoSemana", "ClimaTempo")',
                 type: "POST",
                  data: { idCidade: $('.js-example-basic-single').val() }
             })
             .done(function (partialViewResult) {
-                $(".target").html(partialViewResult);
+                $(".cardsPrevisaoSemana").html(partialViewResult);
             });
         });
     });
@@ -32,16 +31,14 @@
 
 </script>
 
-<h2>ClimaTempo</h2>
-
 @{
     Html.RenderAction("CardsCidadesMaisQuentesFrias", "ClimaTempo");
 }
 
+<label>Filtrar Cidade</label>
+@Html.DropDownList("Cidade", null, new { @class = "js-example-basic-single", @style = "width: 100%" })
 
-@Html.DropDownList("Cidade", null, new { @class = "js-example-basic-single" })
-
-<div class="target">
+<div class="cardsPrevisaoSemana">
     @{
         Html.RenderAction("CardsPrevisaoSemana", "ClimaTempo");
     }

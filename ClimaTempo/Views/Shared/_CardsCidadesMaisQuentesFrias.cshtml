@@ -4,23 +4,49 @@
     List<ClimaTempo.Models.CidadesMaisQuentesFrias> cidadesMaisFrias = (List<ClimaTempo.Models.CidadesMaisQuentesFrias>)ViewBag.CidadesMaisFrias;
 }
 
+<div class="col-12 row title-clima-tempo-hoje">
+    <label>Clima Tempo para o dia : @ViewBag.Hoje</label>
+</div>
+
 <div class="col-12 row">
+    
     <div class="col-lg-6">
-        <div class="panel panel-default">
-            <div class="panel-heading"><label>Cidades mais quentes hoje</label></div>
+        <label class="label-title-cidades">Cidades mais quentes hoje</label>
+        <div class="panel panel-default panel-cidades">
+
             @foreach (var item in cidadesMaisQuentes)
             {
-                <div class="panel-body"><label class="pull-left"><label>@item.Cidade</label> <br /> <label>@item.Estado</label></label><label class="pull-right">Máx @item.TemperaturaMaxima °C</label></div>
+                <div class="panel-body row-cidades">
+                    <label class="pull-left">
+                        <label class="label-nome-cidade">@item.Cidade</label> <br />
+                        <label>@item.Estado</label>
+                    </label>
+
+                    <label class="pull-right">
+                        <label class="label-temp-max">Máx.: @item.TemperaturaMaxima °C</label> <br />
+                        <label class="pull-right">Min.: @item.TemperaturaMinima °C</label>
+                    </label>
+                </div>
             }
         </div>
     </div>
 
     <div class="col-lg-6">
-        <div class="panel panel-default">
-            <div class="panel-heading"><label>Cidades mais frias hoje</label></div>
+        <label class="label-title-cidades">Cidades mais frias hoje</label>
+        <div class="panel panel-default panel-cidades">
             @foreach (var item in cidadesMaisFrias)
             {
-                <div class="panel-body"><label class="pull-left">@item.Cidade / @item.Estado</label><label class="pull-right">Máx @item.TemperaturaMaxima °C</label></div>
+                <div class="panel-body row-cidades">
+                    <label class="pull-left">
+                        <label class="label-nome-cidade">@item.Cidade</label> <br />
+                        <label>@item.Estado</label>
+                    </label>
+
+                    <label class="pull-right">
+                        <label class="label-temp-max">Máx.: @item.TemperaturaMaxima °C</label> <br />
+                        <label class="pull-right">Min.: @item.TemperaturaMinima °C</label>
+                    </label>
+                </div>
             }
         </div>
     </div>

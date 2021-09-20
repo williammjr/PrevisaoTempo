@@ -18,78 +18,6 @@ namespace ClimaTempo.Controllers
             return View();
         }
 
-        // GET: ClimaTempo/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: ClimaTempo/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: ClimaTempo/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: ClimaTempo/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: ClimaTempo/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: ClimaTempo/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: ClimaTempo/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
         public ActionResult CardsPrevisaoSemana(int idCidade = 0)
         {
             context db = new context();
@@ -110,13 +38,15 @@ namespace ClimaTempo.Controllers
                 .ToList();
 
             ViewBag.PrevisaoSemana = previsaoSemana;
+            ViewBag.CidadeFiltrada = db.Cidade.Where(w => w.ID == cidade).Select(s => s.Nome).FirstOrDefault();
 
             return PartialView("_CardsPrevisaoSemana");
         }
 
         public ActionResult CardsCidadesMaisQuentesFrias()
         {
-            string[] hojeArray = "2021-03-03".Split('-');
+            string hoje = "2021-03-03";
+            string[] hojeArray = hoje.Split('-');
 
             Int32.TryParse(hojeArray[0], out int ano);
             Int32.TryParse(hojeArray[1], out int mes);
@@ -135,7 +65,7 @@ namespace ClimaTempo.Controllers
                           select new CidadesMaisQuentesFrias
                           {
                               Cidade = cidade.Nome,
-                              Estado = estado.UF,
+                              Estado = estado.Nome,
                               TemperaturaMaxima = previsao.TemperaturaMaxima,
                               TemperaturaMinima = previsao.TemperaturaMinima
                           })
@@ -151,7 +81,7 @@ namespace ClimaTempo.Controllers
                                     select new CidadesMaisQuentesFrias
                                     {
                                         Cidade = cidade.Nome,
-                                        Estado = estado.UF,
+                                        Estado = estado.Nome,
                                         TemperaturaMaxima = previsao.TemperaturaMaxima,
                                         TemperaturaMinima = previsao.TemperaturaMinima
                                     })
@@ -160,6 +90,7 @@ namespace ClimaTempo.Controllers
 
             ViewBag.CidadesMaisFrias = cidadesMaisFrias;
             ViewBag.CidadesMaisQuentes = cidadesMaisQuentes;
+            ViewBag.Hoje = hoje;
 
             return PartialView("_CardsCidadesMaisQuentesFrias");
         }
