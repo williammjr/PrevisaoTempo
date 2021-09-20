@@ -1,6 +1,6 @@
 # PrevisaoTempo
 
-Para executar o projeto crie no localDB o Database "ClimaTempoSimples" e executa o script sistema_consulta_clima.sql
+Para executar o projeto crie no localDB o Database "ClimaTempoSimples" e execute o script sistema_consulta_clima.sql
 
 ou
 
