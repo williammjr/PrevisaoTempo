@@ -11,17 +11,28 @@ namespace ClimaTempo.Controllers
     public class ClimaTempoController : Controller
     {
         // GET: ClimaTempo
-        public ActionResult Index()
+        public ActionResult Index(string hoje)
         {
+            if (String.IsNullOrEmpty(hoje))
+            {
+                hoje = DateTime.Now.ToString("yyyy-MM-dd");
+            }
+
             context db = new context();
             ViewBag.Cidade = new SelectList(db.Cidade.Select(s => new { Text = s.Nome, Value = s.ID }).ToList(), "Value", "Text");
+            ViewBag.Hoje = hoje;
             return View();
         }
 
-        public ActionResult CardsPrevisaoSemana(int idCidade = 0)
+        public ActionResult CardsPrevisaoSemana(string hoje, int idCidade = 0)
         {
+            if (String.IsNullOrEmpty(hoje))
+            {
+                hoje = DateTime.Now.ToString("yyyy-MM-dd");
+            }
+
             context db = new context();
-            string[] hojeArray = "2021-03-03".Split('-');
+            string[] hojeArray = hoje.Split('-');
 
             Int32.TryParse(hojeArray[0], out int ano);
             Int32.TryParse(hojeArray[1], out int mes);
@@ -43,9 +54,13 @@ namespace ClimaTempo.Controllers
             return PartialView("_CardsPrevisaoSemana");
         }
 
-        public ActionResult CardsCidadesMaisQuentesFrias()
+        public ActionResult CardsCidadesMaisQuentesFrias(string hoje)
         {
-            string hoje = "2021-03-03";
+            if (String.IsNullOrEmpty(hoje))
+            {
+                hoje = DateTime.Now.ToString("yyyy-MM-dd");
+            }
+
             string[] hojeArray = hoje.Split('-');
 
             Int32.TryParse(hojeArray[0], out int ano);

@@ -15,11 +15,12 @@
     $(document).ready(function () {
         $('.js-example-basic-single').select2();
 
+        var hoje = '@ViewBag.Hoje';
         $('.js-example-basic-single').on('select2:select', function (e) {
              $.ajax({
                 url: '@Url.Action("CardsPrevisaoSemana", "ClimaTempo")',
                 type: "POST",
-                 data: { idCidade: $('.js-example-basic-single').val() }
+                 data: { idCidade: $('.js-example-basic-single').val(), hoje }
             })
             .done(function (partialViewResult) {
                 $(".cardsPrevisaoSemana").html(partialViewResult);
@@ -32,7 +33,7 @@
 </script>
 
 @{
-    Html.RenderAction("CardsCidadesMaisQuentesFrias", "ClimaTempo");
+    Html.RenderAction("CardsCidadesMaisQuentesFrias", "ClimaTempo", new { hoje = ViewBag.Hoje });
 }
 
 <label>Filtrar Cidade</label>
@@ -40,6 +41,6 @@
 
 <div class="cardsPrevisaoSemana">
     @{
-        Html.RenderAction("CardsPrevisaoSemana", "ClimaTempo");
+        Html.RenderAction("CardsPrevisaoSemana", "ClimaTempo", new { hoje = ViewBag.Hoje });
     }
 </div>

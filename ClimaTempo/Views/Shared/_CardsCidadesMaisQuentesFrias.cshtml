@@ -9,24 +9,47 @@
 </div>
 
 <div class="col-12 row">
-    
+
     <div class="col-lg-6">
         <label class="label-title-cidades">Cidades mais quentes hoje</label>
         <div class="panel panel-default panel-cidades">
 
-            @foreach (var item in cidadesMaisQuentes)
-            {
-                <div class="panel-body row-cidades">
-                    <label class="pull-left">
-                        <label class="label-nome-cidade">@item.Cidade</label> <br />
-                        <label>@item.Estado</label>
-                    </label>
+            @{
+                if (cidadesMaisFrias.Count == 0)
+                {
+                    for (int i = 0; i < 3; i++)
+                    {
+                        <div class="panel-body row-cidades">
+                            <label class="pull-left">
+                                <label class="label-nome-cidade">--</label> <br />
+                                <label>--</label>
+                            </label>
 
-                    <label class="pull-right">
-                        <label class="label-temp-max">Máx.: @item.TemperaturaMaxima °C</label> <br />
-                        <label class="pull-right">Min.: @item.TemperaturaMinima °C</label>
-                    </label>
-                </div>
+                            <label class="pull-right">
+                                <label class="label-temp-max">Máx.: --</label> <br />
+                                <label class="pull-right">Min.: --</label>
+                            </label>
+                        </div>
+                    }
+
+                }
+                else
+                {
+                    foreach (var item in cidadesMaisQuentes)
+                    {
+                        <div class="panel-body row-cidades">
+                            <label class="pull-left">
+                                <label class="label-nome-cidade">@item.Cidade</label> <br />
+                                <label>@item.Estado</label>
+                            </label>
+
+                            <label class="pull-right">
+                                <label class="label-temp-max">Máx.: @item.TemperaturaMaxima °C</label> <br />
+                                <label class="pull-right">Min.: @item.TemperaturaMinima °C</label>
+                            </label>
+                        </div>
+                    }
+                } 
             }
         </div>
     </div>
@@ -34,20 +57,45 @@
     <div class="col-lg-6">
         <label class="label-title-cidades">Cidades mais frias hoje</label>
         <div class="panel panel-default panel-cidades">
-            @foreach (var item in cidadesMaisFrias)
-            {
-                <div class="panel-body row-cidades">
-                    <label class="pull-left">
-                        <label class="label-nome-cidade">@item.Cidade</label> <br />
-                        <label>@item.Estado</label>
-                    </label>
+            @{
+                if (cidadesMaisFrias.Count == 0)
+                {
+                    for (int i = 0; i < 3; i++)
+                    {
+                        <div class="panel-body row-cidades">
+                            <label class="pull-left">
+                                <label class="label-nome-cidade">--</label> <br />
+                                <label>--</label>
+                            </label>
 
-                    <label class="pull-right">
-                        <label class="label-temp-max">Máx.: @item.TemperaturaMaxima °C</label> <br />
-                        <label class="pull-right">Min.: @item.TemperaturaMinima °C</label>
-                    </label>
-                </div>
+                            <label class="pull-right">
+                                <label class="label-temp-max">Máx.: --</label> <br />
+                                <label class="pull-right">Min.: --</label>
+                            </label>
+                        </div>
+                    }
+
+                }
+                else
+                {
+                    foreach (var item in cidadesMaisFrias)
+                    {
+                        <div class="panel-body row-cidades">
+                            <label class="pull-left">
+                                <label class="label-nome-cidade">@item.Cidade</label> <br />
+                                <label>@item.Estado</label>
+                            </label>
+
+                            <label class="pull-right">
+                                <label class="label-temp-max">Máx.: @item.TemperaturaMaxima °C</label> <br />
+                                <label class="pull-right">Min.: @item.TemperaturaMinima °C</label>
+                            </label>
+                        </div>
+                    }
+                }
             }
+
+
         </div>
     </div>
 </div>
